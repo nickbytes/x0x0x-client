@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>x0x0x</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, height=device-height, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="notify"></div>
+      <header>
+        <h2 id="tab-feed" class="active">Feed</h2>
+        <h2 id="tab-share">Share</h2>
+        <h2 id="tab-saved">Saved</h2>
+        <h2 id="tab-network">Networks</h2>
+      </header>
+      <div class="share-wrapper trio">
+        <h2>Share a link</h2>
+        <form id="form-item">
+          <p class="note">Posted links are removed after 48 hours</p>
+          <input type="text" name="url" placeholder="URL (required)" required>
+          <input type="text" name="description" placeholder="description (optional)">
+          <button id="item-add">add</button>
+        </form>
+      </div>
+
+      <div class="feed-wrapper trio active">
+        <ul id="feed"></ul>
+      </div>
+
+      <div class="saved-wrapper trio">
+        <ul id="saved">
+          <li class="notice active">Nothing saved yet!</li>
+        </ul>
+      </div>
+
+      <div class="network-wrapper trio">
+        <h2>Connected networks</h2>
+        <form id="form-network">
+          <p class="note">Add/remove servers to share and subscribe to.</p>
+          <input type="text" name="network-url" placeholder="Network URL (required)" required>
+          <button id="network-add">add</button>
+        </form>
+        <ul id="network"></ul>
+      </div>
+    </div>
+    <script src="/bundle.js"></script>
+  </body>
+</html>
