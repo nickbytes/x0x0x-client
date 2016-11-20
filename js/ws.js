@@ -25,6 +25,7 @@ exports.reconnect = function () {
         }))
 
         ws[host[1]].onmessage = function (data) {
+          console.log('incoming ', data)
           data = JSON.parse(data.data)
           item.display(data)
         }

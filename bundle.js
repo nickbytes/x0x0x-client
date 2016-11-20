@@ -12,6 +12,9 @@ var saved = document.querySelector('#saved')
 var savedEmpty = document.querySelector('#saved li.notice')
 var savedItems = {}
 
+// 1 second x 60 seconds x 60 minutes x 24 hours
+var alive = 1000 * 60 * 60 * 24
+
 exports.add = function (inputs) {
   var data = {}
   var msg = {}
@@ -154,17 +157,23 @@ function generateLink (item, isSave) {
 }
 
 exports.display = function (result) {
+  console.log('!!!!!!!!! ', result)
   if (typeof result !== 'object') {
     result = JSON.parse(result)
   }
 
+  if (!result.value) {
+    return
+  }
   switch (result.type) {
     case 'item.add':
       console.log('item added ', result)
       break
     case 'item.feed':
       result = result.value
+      console.log('++++++ ', result)
       result.forEach(function (r) {
+        console.log('.... ', r)
         var item = {
           id: r.url.replace(/[^A-Z0-9]+/gi, ''),
           url: r.url,
@@ -392,6 +401,7 @@ exports.reconnect = function () {
         }))
 
         ws[host[1]].onmessage = function (data) {
+          console.log('incoming ', data)
           data = JSON.parse(data.data)
           item.display(data)
         }
