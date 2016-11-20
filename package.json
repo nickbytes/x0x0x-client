@@ -8,11 +8,9 @@
     "npm": "2.x.x"
   },
   "scripts": {
-    "start": "nodemon index.js",
-    "build": "browserify public/js/main.js > public/bundle.js"
+    "build": "browserify js/main.js > bundle.js"
   },
   "dependencies": {
-    "express": "^4.14.0",
     "localforage": "^1.4.3"
   },
   "devDependencies": {

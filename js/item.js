@@ -36,31 +36,32 @@ exports.add = function (inputs) {
       data[inputs[i].name] = inputs[i].value
       inputs[i].value = ''
       inputs[i].checked = ''
-      msg.notice = 'Shared your link to the network'
-      notify(msg)
     }
   }
 
-  network.list(true, function (_, hosts) {
+  network.list(function (_, hosts) {
     var wsList = ws.list()
 
     for (var k in hosts) {
-      let m = k.split('://')[1]
+      k = k.split('://')[1]
 
-      wsList[m].send(JSON.stringify({
-        type: 'item.add',
-        value: data
-      }))
-
-      if (!wsList[m]) {
-        ws.reconnect(m)
+      try {
+        wsList[k].send(JSON.stringify({
+          type: 'item.add',
+          value: data
+        }))
+      } catch (err) {
+        console.log('could not connect to ', k, err)
+        msg.error = 'Could not share with network: ' + k
+        notify(msg)
+        return
       }
     }
-    console.log('reconnecting after adding')
+
+    msg.notice = 'Shared your link to the network.'
+    notify(msg)
   })
 }
-
-var savedEmpty = document.querySelector('#saved li.notice')
 
 exports.list = function () {
   var msg = {}
@@ -69,24 +70,15 @@ exports.list = function () {
       msg.error = 'Could not retrieve saved links'
       notify(msg)
     } else {
-      var li
-
-      if (items) {
-        savedEmpty.classList.remove('active')
-      }
-
+      console.log('loaded: ', items)
       for (var k in items) {
         savedItems[k] = items[k]
-        li = generateLink(items[k])
+        var li = generateLink(items[k])
         if (saved.childNodes.length < 1) {
           saved.append(li)
         } else {
           saved.prepend(li)
         }
-      }
-
-      if (saved.childNodes.length < 1) {
-        savedEmpty.classList.add('active')
       }
     }
   })
@@ -94,11 +86,14 @@ exports.list = function () {
 
 function generateLink (item) {
   var li = document.createElement('li')
+  var h3 = document.createElement('h3')
+  h3.textContent = item.title
   var p = document.createElement('p')
   p.classList.add('description')
   p.textContent = item.description
   var a = document.createElement('a')
   a.href = a.textContent = item.url
+  li.appendChild(h3)
   li.appendChild(p)
   li.appendChild(a)
   return li
@@ -107,20 +102,31 @@ function generateLink (item) {
 exports.display = function (result) {
   var msg = {}
 
+  if (typeof result !== 'object') {
+    result = JSON.parse(result)
+  }
+
   switch (result.type) {
     case 'item.add':
       console.log('item added ', result)
       break
     case 'item.feed':
+      console.log('got to feed')
       result = result.value
       result.forEach(function (r) {
         var item = {
           id: r.url.replace(/[^A-Z0-9]+/gi, ''),
+          title: r.title || r.url,
           url: r.url,
           description: r.description
         }
 
-        var li = generateLink(item)
+        var li = document.querySelector('#' + item.id)
+        if (li) {
+          return
+        }
+        li = generateLink(item)
+        li.id = item.id
         var btn = document.createElement('button')
         btn.textContent = '↯'
         btn.onclick = function () {
@@ -138,7 +144,6 @@ exports.display = function (result) {
                 } else {
                   saved.prepend(li2)
                 }
-                savedEmpty.classList.remove('active')
               }
             })
           } else {

@@ -2,6 +2,7 @@
 
 var item = require('./item')
 var network = require('./network')
+var ws = require('./ws')
 
 var formItem = document.querySelector('#form-item')
 var formNetwork = document.querySelector('#form-network')
@@ -14,7 +15,7 @@ notify.onclick = function () {
   notify.classList.remove('active')
 }
 
-network.list()
+ws.reconnect()
 item.list()
 
 formItem.onsubmit = function (ev) {

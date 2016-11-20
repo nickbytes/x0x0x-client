@@ -19,17 +19,23 @@ function remove (host) {
       msg.error = err
     } else {
       msg.notice = host
-      redraw()
+      exports.redraw()
     }
     notify(msg)
   })
 }
 
-function redraw () {
+exports.setNetwork = function (n) {
+  network = n
+}
+
+exports.redraw = function () {
   networkList.innerHTML = ''
+  console.log('networks : ', network)
   for (var k in network) {
     var n = document.createElement('li')
     n.textContent = k
+    console.log(k)
     n.id = 'network-' + k.replace(/^\w+/gi, '')
     var btn = document.createElement('button')
     btn.textContent = '✖'
@@ -66,44 +72,19 @@ exports.add = function (host) {
         msg.error = 'Could not save host: ' + err
       } else {
         msg.notice = 'Added host ' + host
-        redraw()
+        exports.redraw()
       }
       notify(msg)
     })
   })
 }
 
-exports.list = function (shallow, next) {
+exports.list = function (next) {
   db.getItem('network', function (err, n) {
     if (!err && n) {
       network = n
     }
 
-    if (shallow && next) {
-      next(null, network)
-    } else {
-      for (var k in network) {
-        var wsList = ws.list()
-        var link = k.split('://')[1]
-
-        if (!wsList[link]) {
-          ws.reconnect(k)
-          wsList = ws.list()
-        }
-        console.log('reconnecting to ', k)
-
-        wsList[link].onopen = function () {
-          wsList[link].send(JSON.stringify({
-            type: 'item.feed'
-          }))
-
-          wsList[link].onmessage = function (data) {
-            item.display(JSON.parse(data.data))
-          }
-        }
-      }
-
-      redraw()
-    }
+    next(null, network)
   })
 }
