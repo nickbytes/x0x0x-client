@@ -9,6 +9,7 @@ var network = require('./network')
 
 var feed = document.querySelector('#feed')
 var saved = document.querySelector('#saved')
+var savedEmpty = document.querySelector('#saved li.notice')
 var savedItems = {}
 
 exports.add = function (inputs) {
@@ -36,7 +37,6 @@ exports.add = function (inputs) {
     if (update) {
       data[inputs[i].name] = inputs[i].value
       inputs[i].value = ''
-      inputs[i].checked = ''
     }
   }
 
@@ -64,6 +64,40 @@ exports.add = function (inputs) {
   })
 }
 
+function save (btn, item) {
+  var msg = {}
+  db.setItem('saved', savedItems, function (err) {
+    if (err) {
+      msg.error = 'Could not save link'
+      notify(msg)
+    } else {
+      btn.classList.add('saved')
+      var li2 = generateLink(item, true)
+      savedEmpty.classList.remove('active')
+      if (saved.childNodes.length < 1) {
+        saved.append(li2)
+      } else {
+        saved.prepend(li2)
+      }
+    }
+  })
+}
+
+function unsave (id) {
+  var msg = {}
+  document.querySelector('#' + id).classList.add('deleted')
+  delete savedItems[id.split('s-')[1]]
+  if (saved.childNodes.length < 1) {
+    savedEmpty.classList.add('active')
+  }
+  db.setItem('saved', savedItems, function (err) {
+    if (err) {
+      msg.error = 'Could not unsave this link. Refresh and try again?'
+      notify(msg)
+    }
+  })
+}
+
 exports.list = function () {
   var msg = {}
   db.getItem('saved', function (err, items) {
@@ -71,38 +105,55 @@ exports.list = function () {
       msg.error = 'Could not retrieve saved links'
       notify(msg)
     } else {
-      console.log('loaded: ', items)
       for (var k in items) {
         savedItems[k] = items[k]
-        var li = generateLink(items[k])
-        if (saved.childNodes.length < 1) {
-          saved.append(li)
-        } else {
-          saved.prepend(li)
-        }
+        var li = generateLink(items[k], true)
+        savedEmpty.classList.remove('active')
+        saved.prepend(li)
       }
     }
   })
 }
 
-function generateLink (item) {
+function generateLink (item, isSave) {
   var li = document.createElement('li')
-  var h3 = document.createElement('h3')
-  h3.textContent = item.title
+  var msg = {}
+  var btn
+
+  if (isSave) {
+    li.id = 's-' + item.id
+    btn = document.createElement('button')
+    btn.textContent = '✖'
+    btn.onclick = function (ev) {
+      ev.preventDefault()
+      unsave(btn.parentNode.id)
+    }
+  } else {
+    li.id = item.id
+    btn = document.createElement('button')
+    btn.textContent = '↯'
+    btn.onclick = function () {
+      if (!savedItems[item.id]) {
+        savedItems[item.id] = item
+        save(btn, item)
+      } else {
+        msg.error = 'You already saved this link.'
+        notify(msg)
+      }
+    }
+  }
   var p = document.createElement('p')
   p.classList.add('description')
   p.textContent = item.description
   var a = document.createElement('a')
   a.href = a.textContent = item.url
-  li.appendChild(h3)
   li.appendChild(p)
   li.appendChild(a)
+  li.appendChild(btn)
   return li
 }
 
 exports.display = function (result) {
-  var msg = {}
-
   if (typeof result !== 'object') {
     result = JSON.parse(result)
   }
@@ -112,12 +163,10 @@ exports.display = function (result) {
       console.log('item added ', result)
       break
     case 'item.feed':
-      console.log('got to feed')
       result = result.value
       result.forEach(function (r) {
         var item = {
           id: r.url.replace(/[^A-Z0-9]+/gi, ''),
-          title: r.title || r.url,
           url: r.url,
           description: r.description
         }
@@ -127,33 +176,6 @@ exports.display = function (result) {
           return
         }
         li = generateLink(item)
-        li.id = item.id
-        var btn = document.createElement('button')
-        btn.textContent = '↯'
-        btn.onclick = function () {
-          if (!savedItems[item.id]) {
-            savedItems[item.id] = item
-            db.setItem('saved', savedItems, function (err) {
-              if (err) {
-                msg.error = 'Could not save link'
-                notify(msg)
-              } else {
-                btn.classList.add('saved')
-                var li2 = generateLink(item)
-                if (saved.childNodes.length < 1) {
-                  saved.append(li2)
-                } else {
-                  saved.prepend(li2)
-                }
-              }
-            })
-          } else {
-            msg.error = 'You have saved this link already.'
-            notify(msg)
-          }
-        }
-
-        li.appendChild(btn)
         if (feed.childNodes.length < 1) {
           feed.append(li)
         } else {
@@ -186,6 +208,10 @@ notify.onclick = function () {
 
 ws.reconnect()
 item.list()
+network.list(function (_, hosts) {
+  network.setNetwork(hosts)
+  network.redraw()
+})
 
 formItem.onsubmit = function (ev) {
   ev.preventDefault()
@@ -232,8 +258,6 @@ selectTab('feed')
 var db = require('localforage')
 
 var notify = require('./notify')
-var ws = require('./ws')
-var item = require('./item')
 
 var network = {}
 var networkList = document.querySelector('#network')
@@ -260,11 +284,10 @@ exports.setNetwork = function (n) {
 
 exports.redraw = function () {
   networkList.innerHTML = ''
-  console.log('networks : ', network)
+  // console.log('networks : ', network)
   for (var k in network) {
     var n = document.createElement('li')
     n.textContent = k
-    console.log(k)
     n.id = 'network-' + k.replace(/^\w+/gi, '')
     var btn = document.createElement('button')
     btn.textContent = '✖'
@@ -318,7 +341,7 @@ exports.list = function (next) {
   })
 }
 
-},{"./item":1,"./notify":4,"./ws":5,"localforage":6}],4:[function(require,module,exports){
+},{"./notify":4,"localforage":6}],4:[function(require,module,exports){
 'use strict'
 
 var notification = document.querySelector('#notify')
@@ -369,15 +392,10 @@ exports.reconnect = function () {
         }))
 
         ws[host[1]].onmessage = function (data) {
-          console.log('got hereee ', data)
           data = JSON.parse(data.data)
           item.display(data)
         }
       }
-
-      window.setInterval(function () {
-        console.log('pinging status ', ws[host[1]])
-      }, 15000)
     } catch (err) {
       console.log(err)
     }

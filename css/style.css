@@ -155,6 +155,7 @@ li {
   margin: 5px 0;
   padding: 10px 20px;
   position: relative;
+  max-height: 80px;
 }
 
 li a {
@@ -183,8 +184,12 @@ li.notice.active {
   border-top: 2px solid #fff;
 }
 
-#network button {
-  background-color: rgba(240, 10, 10, 0.9);
+.deleted {
+  display: none;
+}
+
+#network button, #saved li button {
+  background-color: rgba(250, 10, 220, 0.9);
 }
 
 li button {
@@ -207,6 +212,7 @@ li button.saved {
 
 li h3 {
   margin-right: 20px;
+  max-width: 80vw;
 }
 
 @media (max-width: 600px) {

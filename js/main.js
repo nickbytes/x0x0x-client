@@ -17,6 +17,10 @@ notify.onclick = function () {
 
 ws.reconnect()
 item.list()
+network.list(function (_, hosts) {
+  network.setNetwork(hosts)
+  network.redraw()
+})
 
 formItem.onsubmit = function (ev) {
   ev.preventDefault()

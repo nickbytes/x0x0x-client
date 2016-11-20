@@ -25,15 +25,10 @@ exports.reconnect = function () {
         }))
 
         ws[host[1]].onmessage = function (data) {
-          console.log('got hereee ', data)
           data = JSON.parse(data.data)
           item.display(data)
         }
       }
-
-      window.setInterval(function () {
-        console.log('pinging status ', ws[host[1]])
-      }, 15000)
     } catch (err) {
       console.log(err)
     }

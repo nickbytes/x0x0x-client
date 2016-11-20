@@ -3,8 +3,6 @@
 var db = require('localforage')
 
 var notify = require('./notify')
-var ws = require('./ws')
-var item = require('./item')
 
 var network = {}
 var networkList = document.querySelector('#network')
@@ -31,11 +29,10 @@ exports.setNetwork = function (n) {
 
 exports.redraw = function () {
   networkList.innerHTML = ''
-  console.log('networks : ', network)
+  // console.log('networks : ', network)
   for (var k in network) {
     var n = document.createElement('li')
     n.textContent = k
-    console.log(k)
     n.id = 'network-' + k.replace(/^\w+/gi, '')
     var btn = document.createElement('button')
     btn.textContent = '✖'
