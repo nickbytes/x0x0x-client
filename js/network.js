@@ -3,6 +3,7 @@
 var db = require('localforage')
 
 var notify = require('./notify')
+var ws = require('./ws')
 
 var network = {}
 var networkList = document.querySelector('#network')
@@ -70,6 +71,7 @@ exports.add = function (host) {
       } else {
         msg.notice = 'Added host ' + host
         exports.redraw()
+        ws.reconnect()
       }
       notify(msg)
     })

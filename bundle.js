@@ -157,7 +157,6 @@ function generateLink (item, isSave) {
 }
 
 exports.display = function (result) {
-  console.log('!!!!!!!!! ', result)
   if (typeof result !== 'object') {
     result = JSON.parse(result)
   }
@@ -171,9 +170,7 @@ exports.display = function (result) {
       break
     case 'item.feed':
       result = result.value
-      console.log('++++++ ', result)
       result.forEach(function (r) {
-        console.log('.... ', r)
         var item = {
           id: r.url.replace(/[^A-Z0-9]+/gi, ''),
           url: r.url,
@@ -267,6 +264,7 @@ selectTab('feed')
 var db = require('localforage')
 
 var notify = require('./notify')
+var ws = require('./ws')
 
 var network = {}
 var networkList = document.querySelector('#network')
@@ -334,6 +332,7 @@ exports.add = function (host) {
       } else {
         msg.notice = 'Added host ' + host
         exports.redraw()
+        ws.reconnect()
       }
       notify(msg)
     })
@@ -350,7 +349,7 @@ exports.list = function (next) {
   })
 }
 
-},{"./notify":4,"localforage":6}],4:[function(require,module,exports){
+},{"./notify":4,"./ws":5,"localforage":6}],4:[function(require,module,exports){
 'use strict'
 
 var notification = document.querySelector('#notify')
