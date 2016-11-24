@@ -12,12 +12,14 @@ var saved = document.querySelector('#saved')
 var savedEmpty = document.querySelector('#saved li.notice')
 var savedItems = {}
 
-// 1 second x 60 seconds x 60 minutes x 24 hours
-var alive = 1000 * 60 * 60 * 24
-
 exports.add = function (inputs) {
-  var data = {}
   var msg = {}
+  var data = {}
+
+  if (Object.keys(network.getNetwork()).length < 1) {
+    msg.error = "It looks like you haven't added a network yet. You'll need to add one before you can share links."
+    return notify(msg)
+  }
 
   for (var i = 0; i < inputs.length; i++) {
     var update = false
@@ -169,6 +171,8 @@ exports.display = function (result) {
       console.log('item added ', result)
       break
     case 'item.feed':
+      feed.querySelector('.notice').classList.remove('active')
+
       result = result.value
       result.forEach(function (r) {
         var item = {
@@ -287,6 +291,10 @@ function remove (host) {
 
 exports.setNetwork = function (n) {
   network = n
+}
+
+exports.getNetwork = function () {
+  return network
 }
 
 exports.redraw = function () {

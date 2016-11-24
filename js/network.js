@@ -28,6 +28,10 @@ exports.setNetwork = function (n) {
   network = n
 }
 
+exports.getNetwork = function () {
+  return network
+}
+
 exports.redraw = function () {
   networkList.innerHTML = ''
   // console.log('networks : ', network)
