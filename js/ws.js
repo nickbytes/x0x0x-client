@@ -17,6 +17,7 @@ exports.reconnect = function () {
       ws[host[1]] = new window.WebSocket('ws' + (protocol === 'https' ? 's' : '') + '://' + host[1])
       ws[host[1]].onerror = function () {
         console.log('could not connect to ', host[1])
+        ws[host[1]].close()
       }
 
       ws[host[1]].onopen = function () {
@@ -29,6 +30,13 @@ exports.reconnect = function () {
           data = JSON.parse(data.data)
           item.display(data)
         }
+      }
+
+      ws[host[1]].onclose = function () {
+        console.log('reconnecting to', network)
+        setTimeout(function () {
+          connect(network)
+        }, 1500)
       }
     } catch (err) {
       console.log(err)
