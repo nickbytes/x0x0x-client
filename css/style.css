@@ -153,9 +153,8 @@ p.note {
 
 li {
   margin: 5px 0;
-  padding: 10px 20px;
   position: relative;
-  max-height: 150px;
+  max-height: 250px;
 }
 
 li a {
@@ -169,11 +168,28 @@ li a:hover {
   color: #111;
 }
 
+li .object-wrapper {
+  max-width: 85vw;
+}
+
+li div a {
+  background-color: #111;
+  display: block;
+  padding: 15px 50px 15px 20px;
+  font-size: 1.8rem;
+}
+
 li.notice {
   background-color: transparent;
   font-size: 2.8rem;
   line-height: 3.1rem;
   display: none;
+}
+
+li p.description {
+  padding: 10px 20px;
+  background-color: #111;
+  color: #eee;
 }
 
 li.notice.active {
@@ -233,8 +249,8 @@ li h3 {
     font-size: 1.3rem;
   }
 
-  li p, li a {
-    font-size: 1.1rem;
+  li p, li div a {
+    font-size: 1.2rem;
   }
 
   li.notice {

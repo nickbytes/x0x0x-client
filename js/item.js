@@ -1,6 +1,7 @@
 'use strict'
 
 var db = require('localforage')
+var webremix = require('webremix')
 
 var ws = require('./ws')
 var notify = require('./notify')
@@ -146,13 +147,15 @@ function generateLink (item, isSave) {
       }
     }
   }
-  var p = document.createElement('p')
-  p.classList.add('description')
-  p.textContent = item.description
-  var a = document.createElement('a')
-  a.href = a.textContent = item.url
-  li.appendChild(p)
-  li.appendChild(a)
+  if (item.description) {
+    var p = document.createElement('p')
+    p.classList.add('description')
+    p.textContent = item.description
+    li.appendChild(p)
+  }
+  var div = document.createElement('div')
+  div.innerHTML = item.url
+  li.appendChild(div)
   li.appendChild(btn)
   return li
 }
@@ -174,22 +177,27 @@ exports.display = function (result) {
 
       result = result.value
       result.forEach(function (r) {
-        var item = {
-          id: r.url.replace(/[^A-Z0-9]+/gi, ''),
-          url: r.url,
-          description: r.description
-        }
+        webremix.generate(r.url, {
+          width: '100%',
+          height: 180
+        }, (_, html) => {
+          var item = {
+            id: r.url.replace(/[^A-Z0-9]+/gi, ''),
+            url: html,
+            description: r.description
+          }
 
-        var li = document.querySelector('#' + item.id)
-        if (li) {
-          return
-        }
-        li = generateLink(item)
-        if (feed.childNodes.length < 1) {
-          feed.append(li)
-        } else {
-          feed.prepend(li)
-        }
+          var li = document.querySelector('#' + item.id)
+          if (li) {
+            return
+          }
+          li = generateLink(item)
+          if (feed.childNodes.length < 1) {
+            feed.append(li)
+          } else {
+            feed.prepend(li)
+          }
+        })
       })
       break
     default:
