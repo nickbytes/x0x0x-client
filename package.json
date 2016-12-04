@@ -2,7 +2,6 @@
   "name": "x0x0x-client",
   "version": "1.0.0",
   "description": "federated link sharing",
-  "private": true,
   "engines": {
     "node": "~4.x.x",
     "npm": "2.x.x"
@@ -15,7 +14,16 @@
   },
   "devDependencies": {
     "browserify": "^13.1.1",
-    "nodemon": "^1.11.0",
     "standard": "^8.5.0"
-  }
+  },
+  "keywords": [
+    "bookmarking",
+    "federated",
+    "internet",
+    "linking",
+    "links",
+    "sharing"
+  ],
+  "author": "Jen",
+  "license": "GPL-3.0"
 }
