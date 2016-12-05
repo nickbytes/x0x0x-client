@@ -1,7 +1,7 @@
 body, h1, h2, p {
   margin: 0;
   padding: 0;
-  font-family: 'Roboto Condensed';
+  font-family: Questrial, Arial, sans-serif;
   font-size: 1.3rem;
   line-height: 1.5rem;
 }
@@ -153,8 +153,19 @@ p.note {
 
 li {
   margin: 5px 0;
+  padding: 0;
   position: relative;
   max-height: 250px;
+}
+
+#feed li:not(.notice) {
+  background: repeating-linear-gradient(
+    45deg,
+    #fff,
+    #fff 10px,
+    #ccc 10px,
+    #ccc 20px
+  );
 }
 
 li a {
@@ -184,6 +195,7 @@ li.notice {
   font-size: 2.8rem;
   line-height: 3.1rem;
   display: none;
+  padding: 20px;
 }
 
 li p.description {
@@ -216,7 +228,7 @@ li button {
   font-size: 2rem;
   padding: 0;
   border: 0;
-  width: 100px;
+  width: 60px;
 }
 
 li button:hover {
@@ -237,12 +249,16 @@ li h3 {
     font-size: 1.3rem;
   }
 
+  li .object-wrapper {
+    max-width: 100vw;
+  }
+
   .saved-wrapper, .feed-wrapper {
     width: 98vw;
   }
 
   li button {
-    width: 70px;
+    width: 50px;
   }
 
   h3 {
