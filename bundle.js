@@ -33851,7 +33851,7 @@ exports.process = function (media, remix) {
     remix.isMatched = true
 
     remix.result = '<div class="image-wrapper"><a href="' + media + '" target="_blank">' +
-      '<img src="http://instagr.am/p/' + shortcode + '/media/"/></a></div>'
+      '<img src="https://instagr.am/p/' + shortcode + '/media/"/></a></div>'
   }
 
   return remix
@@ -33934,7 +33934,7 @@ exports.process = function (media, remix, options) {
     if (!isNaN(vimeoId)) {
       remix.isMatched = true
 
-      remix.result = '<div class="object-wrapper"><iframe src="http://player.vimeo.com/video/' + vimeoId + '" ' +
+      remix.result = '<div class="object-wrapper"><iframe src="https://player.vimeo.com/video/' + vimeoId + '" ' +
         'width="' + options.width + '" height="' + options.height + '" frameborder="0" ' +
         'webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>'
 
@@ -33966,7 +33966,7 @@ exports.process = function (media, remix, options) {
       }
 
       remix.result = '<div class="object-wrapper"><iframe width="' + options.width + '" height="' +
-        options.height + '" src="http://www.youtube.com/embed/' + youtubeId +
+        options.height + '" src="https://www.youtube.com/embed/' + youtubeId +
         '?wmode=transparent" frameborder="0" allowfullscreen></iframe></div>'
 
       return remix

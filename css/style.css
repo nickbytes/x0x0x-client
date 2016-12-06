@@ -1,3 +1,7 @@
+body {
+  background-color: #50E3C2;
+}
+
 body, h1, h2, p {
   margin: 0;
   padding: 0;
@@ -20,8 +24,8 @@ a {
   z-index: 3;
   width: 96vw;
   padding: 1.1vw 2vw;
-  font-size: 1.5rem;
-  line-height: 1.7rem;
+  font-size: 1.4rem;
+  line-height: 1.6rem;
   opacity: 0;
   -webkit-transition: 1s all;
   transition: 1s all;
@@ -76,7 +80,7 @@ ul {
 }
 
 h2 {
-  font-size: 1.7rem;
+  font-size: 1.4rem;
 }
 
 h2, h3 {
@@ -84,7 +88,7 @@ h2, h3 {
 }
 
 h3 {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   white-space: nowrap;
   color: #222;
 }
@@ -107,12 +111,12 @@ header h2 {
   text-align: center;
   padding: 10px 5px;
   margin: 1px;
-  border-bottom: 10px solid #eee;
+  border-bottom: 5px solid #eee;
   width: 25vw;
 }
 
 header h2.active {
-  border-bottom: 10px solid #222;
+  border-bottom: 5px solid #222;
 }
 
 p.note {
@@ -192,8 +196,8 @@ li div a {
 
 li.notice {
   background-color: transparent;
-  font-size: 2.8rem;
-  line-height: 3.1rem;
+  font-size: 2.7rem;
+  line-height: 3rem;
   display: none;
   padding: 20px;
 }
@@ -228,7 +232,7 @@ li button {
   font-size: 2rem;
   padding: 0;
   border: 0;
-  width: 60px;
+  width: 58px;
 }
 
 li button:hover {
@@ -246,7 +250,7 @@ li h3 {
 
 @media (max-width: 600px) {
   header h2 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
 
   li .object-wrapper {
@@ -255,10 +259,6 @@ li h3 {
 
   .saved-wrapper, .feed-wrapper {
     width: 98vw;
-  }
-
-  li button {
-    width: 50px;
   }
 
   h3 {
