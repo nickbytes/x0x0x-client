@@ -157,7 +157,8 @@ function generateLink (item, isSave) {
   li.appendChild(p)
 
   var a = document.createElement('a')
-  a.textContent = a.href = item.url
+  a.href = item.url
+  a.textContent = item.url.split('://')[1]
   li.appendChild(a)
   li.appendChild(btn)
   return li

@@ -6,6 +6,7 @@ body {
     #4ee9c2 20px,
     #4ee9c2 30px
   );
+  background-attachment: fixed;
 }
 
 body, h1, h2, p {
@@ -64,6 +65,7 @@ form > input[type="text"] {
 form button {
   display: block;
   margin-top: 10px;
+  margin-bottom: 5px;
 }
 
 input {
@@ -116,7 +118,7 @@ header h2.active, .feed-wrapper li, .saved-wrapper li {
 header h2 {
   text-align: center;
   padding: 10px 5px;
-  margin: 1px;
+  margin: 0 1px;
   border-bottom: 5px solid #eee;
   width: 25vw;
 }
@@ -180,8 +182,8 @@ li .object-wrapper {
 li a {
   background-color: #222;
   display: block;
-  padding: 15px 50px 15px 20px;
-  font-size: 1.6rem;
+  padding: 10px 50px 10px 15px;
+  font-size: 1.5rem;
   color: #f0f;
 }
 
@@ -194,8 +196,9 @@ li.notice {
 }
 
 li p.description {
-  padding: 10px 20px;
+  padding: 10px 15px;
   background-color: #222;
+  font-size: 1.5rem;
   color: #eee;
 }
 
@@ -242,6 +245,14 @@ li h3 {
 @media (max-width: 600px) {
   header h2 {
     font-size: 1.2rem;
+  }
+
+  li p.description {
+    font-size: 1.3rem;
+  }
+
+  li a {
+    font-size: 1.3rem;
   }
 
   li .object-wrapper {
