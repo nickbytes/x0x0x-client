@@ -1,5 +1,11 @@
 body {
-  background-color: #50E3C2;
+  background: repeating-linear-gradient(
+    45deg,
+    #50E3C2,
+    #50E3C2 20px,
+    #4ee9c2 20px,
+    #4ee9c2 30px
+  );
 }
 
 body, h1, h2, p {
@@ -162,22 +168,6 @@ li {
   max-height: 250px;
 }
 
-#feed li:not(.notice) {
-  background: repeating-linear-gradient(
-    45deg,
-    #fff,
-    #fff 10px,
-    #ccc 10px,
-    #ccc 20px
-  );
-}
-
-li a {
-  color: #f0f;
-  padding: 3px 5px 3px;
-  margin-left: -5px;
-}
-
 li a:hover {
   background-color: #f0f;
   color: #111;
@@ -187,11 +177,12 @@ li .object-wrapper {
   max-width: 85vw;
 }
 
-li div a {
-  background-color: #111;
+li a {
+  background-color: #222;
   display: block;
   padding: 15px 50px 15px 20px;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
+  color: #f0f;
 }
 
 li.notice {
@@ -204,7 +195,7 @@ li.notice {
 
 li p.description {
   padding: 10px 20px;
-  background-color: #111;
+  background-color: #222;
   color: #eee;
 }
 
