@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="36px" viewBox="0 0 22 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 5</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Nav" transform="translate(-21.000000, -11.000000)" stroke="#000000" stroke-width="1.365">
+            <g id="Group-5" transform="translate(22.000000, 12.000000)">
+                <path d="M0.681818182,25.8493151 L8.08128209,33.4312315" id="Line-Copy-4" stroke-linecap="round" stroke-linejoin="round"></path>
+                <g id="Group-3" transform="translate(0.000000, 0.465753)" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M0.227272727,0.232876712 L7.62673663,7.81479315" id="Line"></path>
+                    <path d="M7.85400936,0.465753425 L0.454545455,8.04766987" id="Line-Copy"></path>
+                </g>
+                <g id="Group-4" transform="translate(11.363636, 13.041096)" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M0.227272727,0.232876712 L7.62673663,7.81479315" id="Line-Copy-2"></path>
+                    <path d="M7.85400936,0.465753425 L0.454545455,8.04766987" id="Line-Copy-3"></path>
+                </g>
+                <path d="M7.85400936,25.6164384 L0.454545455,33.1983548" id="Line-Copy-5" stroke-linecap="round" stroke-linejoin="round"></path>
+                <ellipse id="Oval-2" cx="15.6818182" cy="4.42465753" rx="4.31818182" ry="4.42465753"></ellipse>
+                <ellipse id="Oval-2-Copy" cx="4.31818182" cy="17" rx="4.31818182" ry="4.42465753"></ellipse>
+                <ellipse id="Oval-2-Copy-2" cx="15.6818182" cy="29.5753425" rx="4.31818182" ry="4.42465753"></ellipse>
+            </g>
+        </g>
+    </g>
+</svg>
