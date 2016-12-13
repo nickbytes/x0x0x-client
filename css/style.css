@@ -1,13 +1,151 @@
-body {
-  background: repeating-linear-gradient(
-    45deg,
-    #50E3C2,
-    #50E3C2 20px,
-    #4ee9c2 20px,
-    #4ee9c2 30px
-  );
-  background-attachment: fixed;
+/* 
+
+  x0x0x0 colors
+
+*/
+
+:root {
+  --empty-states: white;
+  --accent: #a3aee3;
+  --dark-accent: #663979;
+  --line-width: 2px;
 }
+
+/* 
+
+  Background gradients and decorative shapes used for background parallax effect (lines, squares, stars, pluses, circles)
+
+*/
+
+html {
+  background-image:
+      linear-gradient( 270deg, var(--dark-accent), var(--accent) ),
+      linear-gradient( 270deg, var(--dark-accent), var(--accent) ),
+      linear-gradient( 270deg, var(--dark-accent), var(--accent) ),
+      linear-gradient( 270deg, var(--dark-accent), var(--accent) ),
+      linear-gradient( 270deg, var(--dark-accent), var(--accent) );
+
+    background-size:
+      86% 20em,
+      25% 20em,
+      30% 20em,
+      70% 25em,
+      70% 25em;
+
+    background-position:
+      6em 15em,
+      95% 20em,
+      95% 55em,
+      20em 38em,
+      10em 20em;
+
+    background-repeat: no-repeat;
+
+    height: 300vh;
+}
+
+.accent {
+  background-color: var(--accent) !important;
+}
+
+.accent::after {
+  background-color: var(--accent) !important;
+}
+
+.accent-border {
+  border-color: var(--accent) !important;
+}
+
+.line {
+  background-color: var(--empty-states);
+  border-radius: var(--line-width);
+  width: var(--line-width);
+}
+
+.line-1 {
+  height: 140px;
+}
+
+.line-2 {
+  height: 80px;
+}
+
+.line-3 {
+  height: 225px;
+}
+
+.line-4 {
+  height: 325px;
+}
+
+.line-5 {
+  height: 1000px;
+}
+
+.line-6 {
+  height: 240px;
+}
+
+.line-7 {
+  height: 500px;
+}
+
+.line-8 {
+  height: 200px;
+}
+
+.line-9 {
+  height: 300px;
+}
+
+.line-10 {
+  height: 300px;
+}
+
+.line-11 {
+  height: 600px;
+}
+
+.circle {
+  border-radius: 50%;
+  border: var(--line-width) solid var(--empty-states);
+  height: 6px;
+  width: 6px;
+}
+
+.square {
+  border-right: var(--line-width) solid var(--empty-states);
+  border-top: var(--line-width) solid var(--empty-states);
+  border-bottom: var(--line-width) solid var(--empty-states);
+  height: 7px;
+  width: 8px;
+  transform: rotate(45deg);
+}
+
+.plus {
+  background-color: var(--empty-states);
+  border-radius: var(--line-width);
+  height: var(--line-width);
+  width: 15px;
+}
+
+.plus::after {
+  display: block;
+  content: '';
+  height: 15px;
+  background-color: var(--empty-states);
+  position: relative;
+  left: 44%;
+  top: -300%;
+  width: var(--line-width);;
+}
+
+
+/* 
+
+  General, global typography/padding
+
+*/
 
 body, h1, h2, p {
   margin: 0;
@@ -156,7 +294,7 @@ header h2 {
 
 #tab-share {
   border-radius: 10em;
-  border: 2px solid black;
+  border: var(--line-width) solid black;
   justify-content: left;
   padding: 0.75em 1em;
   transition: all 0.15s ease-in;
@@ -172,15 +310,14 @@ header h2 {
     flex: 0 1 100%;
     text-align: center;
   }
->>>>>>> Changed toolbar: https://cl.ly/0z0R1P40312p
 }
 
 header h2.active::after {
   background-color: black;
   content: '';
   display: block;
-  height: 2px;
-  margin-top: 2px;
+  height: var(--line-width);
+  margin-top: var(--line-width);
   width: 100%;
 }
 
@@ -224,7 +361,6 @@ li {
   margin: 5px 0;
   padding: 0;
   position: relative;
-  max-height: 250px;
 }
 
 li a:hover {
@@ -246,10 +382,25 @@ li a {
 
 li.notice {
   background-color: transparent;
-  font-size: 2.7rem;
-  line-height: 3rem;
+  color: white;
   display: none;
+  font-size: 1em;
+  line-height: 3rem;
+  margin-top: 10em;
   padding: 20px;
+  text-align: center;
+}
+
+li.notice #tab-share {
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: inline;
+  font-size: 1em;
+  font-style: normal;
+  padding: 0;
+  text-decoration: underline;
 }
 
 li p.description {
@@ -264,7 +415,7 @@ li.notice.active {
 }
 
 #network li {
-  border-top: 2px solid #fff;
+  border-top: var(--line-width) solid #fff;
   padding: 10px 20px;
 }
 

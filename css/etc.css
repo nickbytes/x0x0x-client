@@ -1,0 +1,57 @@
+/* Explosion Keyframes
+--------------------------------------- */
+#domExplosionList {
+  position: fixed;
+  width: 100%;
+}
+.item {
+  position: absolute;
+}
+.dei-1  { top: 45px;    left: 30%; }
+.dei-2  { top: 40px;    left: 50%; }
+.dei-3  { top: -40px;   left: 62%; }
+.dei-4  { top: 20px;    left: 86%; }
+.dei-5  { top: 100px;   left: 15%; }
+.dei-6  { top: 240px;   left: 40%; }
+.dei-7  { top: 400px;   left: 50%; }
+.dei-8  { top: 380px;   left: 63%; }
+.dei-9  { top: 400px;   left: 80%; }
+.dei-10 { top: 550px;   left: 25%; }
+.dei-11 { top: 650px;   left: 68%; }
+.dei-12 { top: 320px;   left: 20%; }
+.dei-13 { top: 550px;   left: 77%; }
+.dei-14 { top: 700px;   left: 20%; }
+.dei-15 { top: 285px;   left: 50%; }
+.dei-16 { top: 700px;   left: 77%; }
+.dei-17 { top: 315px;   left: 74%; }
+.dei-18 { top: 800px;   left: 30%; }
+.dei-19 { top: 780px;   left: 40%; }
+.dei-20 { top: 750px;   left: 60%; }
+.dei-21 { top: 850px;   left: 17%; }
+.dei-22 { top: 800px;   left: 90%; }
+.dei-23 { top: 850px;   left: 90%; }
+.dei-24 { top: 800px;   left: 55%; }
+/* Handling resize and small devices
+--------------------------------------- */
+.error {
+  display: none;
+  position: fixed;
+  width: 80%;
+  font-size: 30px;
+  font-weight: 300;
+  text-align: center;
+  top: 30%;
+  left: 10%;
+}
+.page-error .error {
+  display: block;
+}
+.page-error .container {
+  display: none;
+}
+@media all and (max-width: 1000px) {
+  .error {
+    display: block;
+    font-size: 22px;
+  }
+}

@@ -3,6 +3,7 @@
 var item = require('./item')
 var network = require('./network')
 var ws = require('./ws')
+var parallax = require('./parallax.js')
 
 var formItem = document.querySelector('#form-item')
 var formNetwork = document.querySelector('#form-network')
